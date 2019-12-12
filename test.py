@@ -6,7 +6,8 @@ import cv2
 
 
 # Larger CNN for the MNIST Dataset
-from keras.datasets import mnist
+# from emnist import list_datasets
+# from mnist import MNIST
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
@@ -14,8 +15,16 @@ from keras.layers import Flatten
 from keras.layers.convolutional import Conv2D
 from keras.layers.convolutional import MaxPooling2D
 from keras.utils import np_utils
+
+from emnist import list_datasets
+list_datasets()['balanced', 'byclass', 'bymerge', 'digits', 'letters', 'mnist']
+from emnist import extract_training_samples
+images, labels = extract_training_samples('digits')
+images.shape(240000, 28, 28)
+labels.shape(240000,)
+
 # load data
-(X_train, y_train), (X_test, y_test) = mnist.load_data()
+(X_train, y_train), (X_test, y_test) = emnist.load_data()
 # reshape to be [samples][width][height][channels]
 X_train = X_train.reshape((X_train.shape[0], 28, 28, 1)).astype('float32')
 X_test = X_test.reshape((X_test.shape[0], 28, 28, 1)).astype('float32')

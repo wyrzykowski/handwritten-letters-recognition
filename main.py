@@ -8,13 +8,41 @@ from keras.layers.convolutional import Conv2D
 from keras.layers.convolutional import MaxPooling2D
 from keras.utils import np_utils
 import matplotlib.pyplot as plt
+
+from emnist import list_datasets
+list_datasets()
+['balanced', 'byclass', 'bymerge', 'digits', 'letters', 'mnist']
+from emnist import extract_training_samples
+X_train, y_train = extract_training_samples('letters')
+X_train.shape
+(240000, 28, 28)
+y_train.shape
+(240000,)
+
+from emnist import extract_test_samples
+X_test, y_test = extract_test_samples('letters')
+X_test.shape
+(40000, 28, 28)
+y_test.shape
+(40000,)
+
+
+
 # load data
-(X_train, y_train), (X_test, y_test) = mnist.load_data()
+# (X_train, y_train), (X_test, y_test) = mnist.load_data()
 # reshape to be [samples][width][height][channels]
 
-plt.imshow(X_train[7], cmap=plt.cm.binary) #drugi argument wyswetla zdj normlanie
-plt.show()
-
+# plt.imshow(train_images[7], cmap=plt.cm.binary) #drugi argument wyswetla zdj normlanie
+# plt.show()
+#
+# plt.imshow(train_images[78], cmap=plt.cm.binary) #drugi argument wyswetla zdj normlanie
+# plt.show()
+#
+# plt.imshow(train_images[99], cmap=plt.cm.binary) #drugi argument wyswetla zdj normlanie
+# plt.show()
+#
+# plt.imshow(train_images[45], cmap=plt.cm.binary) #drugi argument wyswetla zdj normlanie
+# plt.show()
 X_train = X_train.reshape((X_train.shape[0], 28, 28, 1)).astype('float32')
 X_test = X_test.reshape((X_test.shape[0], 28, 28, 1)).astype('float32')
 # normalize inputs from 0-255 to 0-1
