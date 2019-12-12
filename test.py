@@ -11,6 +11,7 @@ from keras.layers.convolutional import MaxPooling2D
 from keras.utils import np_utils
 import matplotlib.pyplot as plt
 import numpy as np
+import tensorflow as tf
 from emnist import list_datasets
 list_datasets()
 ['balanced', 'byclass', 'bymerge', 'digits', 'letters', 'mnist']
@@ -38,28 +39,9 @@ labels_train = np_utils.to_categorical(labels_train)
 labels_test = np_utils.to_categorical(labels_test)
 num_classes = labels_test.shape[1]
 
-# define the larger model
-def larger_model():
-	# create model
-	model = Sequential()
-	model.add(Conv2D(30, (5, 5), input_shape=(28, 28, 1), activation='relu'))
-	model.add(MaxPooling2D())
-	model.add(Conv2D(15, (3, 3), activation='relu'))
-	model.add(MaxPooling2D())
-	model.add(Dropout(0.2))
-	model.add(Flatten())
-	model.add(Dense(128, activation='relu'))
-	model.add(Dense(50, activation='relu'))
-	model.add(Dense(num_classes, activation='softmax'))
-	# Compile model
-	model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-	return model
-# build the model
-model = larger_model()
-
 labels = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
-model.load_weights('model.h5')
+model = tf.keras.models.load_model('model.h5')
 
 test_image = cv2.imread('./test-u.png', cv2.IMREAD_GRAYSCALE)
 test_image = ~test_image;

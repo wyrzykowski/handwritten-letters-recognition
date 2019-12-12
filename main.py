@@ -62,13 +62,13 @@ def larger_model():
 model = larger_model()
 
 # Fit the model - Train the model
-model.fit(images_train, labels_train, validation_data=(images_test, labels_test), epochs=10, batch_size=200)
+model.fit(images_train, labels_train, validation_data=(images_test, labels_test), epochs=300, batch_size=200)
 
 # Final evaluation of the model
 scores = model.evaluate(images_test, labels_test, verbose=0)
 
 #save the model to disk
-model.save_weights('model.h5')
+model.save('model.h5')
 
 print("Error: %.2f%%" % (100-scores[1]*100))
 print("Accuracy: %.2f%%" % (scores[1]*100))
